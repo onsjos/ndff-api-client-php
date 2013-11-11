@@ -1,12 +1,12 @@
 ndff-api-client-php
 ===================
 
-php classes for NDFF API
+Php classes for NDFF API
 ------------------------
 
 Examples usage:
 
-_GET speciesgroup butterflies
+*GET speciesgroup butterflies*
 
 ``` php
     $ndff_code_request = new ndff_code_request();
@@ -14,7 +14,7 @@ _GET speciesgroup butterflies
     $butterflies = $ndff_code_request->get_response_data();
 ```
 
-_GET a list of availablelifestages in XML
+*GET a list of availablelifestages in XML*
 
 ``` php
     $ndff_code_request = new ndff_code_request('xml');
@@ -22,7 +22,7 @@ _GET a list of availablelifestages in XML
     $lifestages = $ndff_code_request->get_response_data();
 ```
 
-_POST a new NDFF observation
+*POST a new NDFF observation*
 
 ``` php
     // create a new observation and set data
