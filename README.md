@@ -14,7 +14,7 @@ Examples usage:
     $butterflies = $ndff_code_request->get_response_data();
 ```
 
-*GET a list of availablelifestages in XML*
+*GET a list of all lifestages in XML*
 
 ``` php
     $ndff_code_request = new ndff_code_request('xml');
@@ -30,11 +30,22 @@ Examples usage:
     $observation->setDatasetidentity('http://ndff.nl/telmee/folders/12345');
     $observation->setOriginalabundance(1);
     $observation->setLocation(20, 'SRID=4326;POINT(5.850 51.496)', 'http://ndff-ecogrid.nl/codes/locationtypes/point');
-    $observation->addExtrainfo('http://ndff-ecogrid.nl/codes/keys/validation/observation_status', 'nominal', 'http://ndff-ecogrid.nl/codes/domainvalues/validation/observation_status/concept');
     $observation->setTaxonidentity(12345);
 
     // set the observation and send the request
     $ndff_api_request = new ndff_api_request('telmee', 'onsjos', '********');
     $ndff_api_request->set_request_data($observation);
     $ndff_api_request->resource_post('observation');
+```
+
+*PUT an existing NDFF observation*
+
+``` php
+    // get existing observation
+    $ndff_api_request = new ndff_api_request('telmee', 'onsjos', '********');
+    $ndff_api_request->request_get('observation/by');
+    $ndff_code_request->resource_get('field/lifestages');
+
+    $observation->addExtrainfo('http://ndff-ecogrid.nl/codes/keys/validation/observation_status', 'nominal', 'http://ndff-ecogrid.nl/codes/domainvalues/validation/observation_status/concept');
+
 ```
