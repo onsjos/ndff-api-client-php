@@ -1,10 +1,28 @@
 ndff-api-client-php
 ===================
 
-Php classes for NDFF API
-------------------------
 
-Examples usage:
+
+Installing
+------------------------
+Download the zip from github or install through [composer](www.getcomposer.org). Add the lines below to `composer.json` en run
+`php composer.phar update ndff/api-client`
+``` JSON
+{
+    "require": {
+        "ndff/api-client": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/onsjos/ndff-api-client-php.git"
+        }
+    ]    
+}
+```
+
+Examples
+------------------------
 
 *GET speciesgroup butterflies*
 
