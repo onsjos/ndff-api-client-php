@@ -7,7 +7,9 @@
  * Creates a NDFF observation object with default values
  */
 
-class ndff_observation
+namespace NDFF;
+
+class Observation
 {
 
     var $activity;

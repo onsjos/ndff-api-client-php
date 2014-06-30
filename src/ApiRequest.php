@@ -7,7 +7,11 @@
  * Extends class api_request by providing NDFF API project to url and some minor xml encoding adjustments
  */
 
-class ndff_api_request extends api_request
+namespace NDFF;
+
+use NDFF\Request;
+
+class apiRequest extends Request
 {
 
     var $project;

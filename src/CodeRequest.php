@@ -7,7 +7,11 @@
  * Todo: should only allow GET as it is a readonly resource
   */
 
-class ndff_code_request extends api_request
+namespace NDFF;
+
+use NDFF\Request;
+
+class CodeRequest extends Request
 {
 
     var $project;

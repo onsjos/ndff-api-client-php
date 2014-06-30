@@ -11,7 +11,9 @@
  * Todo: Create setters and getters for filtering, sorting, language
  */
 
-class api_request
+namespace NDFF;
+
+class Request
 {
     var $username;
     var $password;

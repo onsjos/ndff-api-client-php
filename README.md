@@ -9,7 +9,7 @@ Examples usage:
 *GET speciesgroup butterflies*
 
 ``` php
-    $ndff_code_request = new ndff_code_request();
+    $ndff_code_request = new CodeRequest();
     $ndff_code_request->resource_get('speciesgroup/butterflies/');
     $butterflies = $ndff_code_request->get_response_data();
 ```
@@ -17,7 +17,7 @@ Examples usage:
 *GET a list of all lifestages in XML*
 
 ``` php
-    $ndff_code_request = new ndff_code_request('xml');
+    $ndff_code_request = new CodeRequest('xml');
     $ndff_code_request->resource_get('field/lifestages');
     $lifestages = $ndff_code_request->get_response_data();
 ```
@@ -26,14 +26,14 @@ Examples usage:
 
 ``` php
     // create a new observation and set data
-    $observation = new ndff_observation();
+    $observation = new Observation();
     $observation->setDatasetidentity('http://ndff.nl/telmee/folders/12345');
     $observation->setOriginalabundance(1);
     $observation->setLocation(20, 'SRID=4326;POINT(5.850 51.496)', 'http://ndff-ecogrid.nl/codes/locationtypes/point');
     $observation->setTaxonidentity(12345);
 
     // set the observation and send the request
-    $ndff_api_request = new ndff_api_request('telmee', 'onsjos', '********');
+    $ndff_api_request = new ApiRequest('telmee', 'onsjos', '********');
     $ndff_api_request->set_request_data($observation);
     $ndff_api_request->resource_post('observation');
 ```
@@ -42,7 +42,7 @@ Examples usage:
 
 ``` php
     // get existing observation
-    $ndff_api_request = new ndff_api_request('telmee', 'onsjos', '********');
+    $ndff_api_request = new ApiRequest('telmee', 'onsjos', '********');
     $ndff_api_request->request_get('observation/by');
     $ndff_code_request->resource_get('field/lifestages');
 

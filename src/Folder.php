@@ -7,7 +7,9 @@
  * Creates a NDFF folder object
  */
 
-class ndff_folder
+namespace NDFF;
+
+class Folder
 {
 
     var $parentidentity;
