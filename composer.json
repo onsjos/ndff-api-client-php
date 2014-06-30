@@ -3,7 +3,7 @@
     "homepage": "https://github.com/onsjos/ndff-api-client-php",
     "autoload": {
         "psr-0": {
-            "NDFF\\": "src"
+            "NDFF\\": "src/"
         }
     },
     "type": "library",
