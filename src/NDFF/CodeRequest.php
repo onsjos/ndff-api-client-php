@@ -16,10 +16,9 @@ class CodeRequest extends Request
 
     var $project;
 
-    function __construct($encoding_format=false) {
-        $this->base_url = 'http://testapi.ndff.nl/list/v1/';
+    function __construct($base_url = 'http://testapi.ndff.nl/list/v1/',$encoding_format=false) {        
         // no authentication required
-        parent::__construct($this->base_url, false, false, $encoding_format);
+        parent::__construct($base_url, false, false, $encoding_format);
     }
 
     function __destruct() {

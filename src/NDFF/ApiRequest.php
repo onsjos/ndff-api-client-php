@@ -16,10 +16,9 @@ class apiRequest extends Request
 
     var $project;
 
-    function __construct($project=false, $username=false, $password=false, $encoding_format=false) {
-        $this->base_url = 'http://testapi.ndff.nl/api/v1/';
+    function __construct($base_url = 'http://testapi.ndff.nl/api/v1/',$project=false, $username=false, $password=false, $encoding_format=false) {        
         $this->project = $project;
-        parent::__construct($this->base_url, $username, $password, $encoding_format);
+        parent::__construct($base_url, $username, $password, $encoding_format);
     }
 
     function __destruct() {
