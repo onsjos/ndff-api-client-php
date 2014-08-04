@@ -11,7 +11,7 @@ namespace NDFF;
 
 use NDFF\Request;
 
-class apiRequest extends Request
+class ApiRequest extends Request
 {
 
     var $project;
