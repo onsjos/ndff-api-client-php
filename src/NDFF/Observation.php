@@ -30,7 +30,10 @@ class Observation
     var $subjecttypeidentity;
     var $surveymethod;
     var $taxonidentity;
-
+    
+    /**
+     * Create new Observation with default values
+     */
     public function __construct() {
         $this->setActivity('http://ndff-ecogrid.nl/codes/domainvalues/observation/activities/unknown');
         $this->setBiotope('http://ndff-ecogrid.nl/codes/domainvalues/location/biotopes/unknown');
@@ -38,8 +41,7 @@ class Observation
         $this->setLifestage('http://ndff-ecogrid.nl/codes/domainvalues/observation/lifestages/unknown');
         $this->setLocation(0, '', 'http://ndff-ecogrid.nl/codes/locationtypes/point');
         $this->setOriginalabundance(0);
-        $this->setPeriodstart(date('o-m-N\TH:i:s'));
-        $this->setPeriodstop(date('o-m-N\TH:i:s', strtotime(date('c')) + 1));
+        $this->setPeriodstart(date('o-m-d\TH:i:s'));        
         $this->setScaleidentity('http://ndff-ecogrid.nl/codes/scales/exact_count');
         $this->setSex('http://ndff-ecogrid.nl/codes/domainvalues/observation/sexes/undefined');
         $this->setSubjecttypeidentity('http://ndff-ecogrid.nl/codes/subjecttypes/live/individual');
@@ -77,7 +79,12 @@ class Observation
     public function setDeterminationmethod($determinationmethod)    {
         $this->determinationmethod = $determinationmethod;
     }
-
+    /**
+     * 
+     * @param type $field_identity, keyidentity id van extra-info veld
+     * @param string $field_type, bijv. string,identifier, nominal
+     * @param type $field_value waarde voor veld
+     */
     public function addExtrainfo($field_identity, $field_type, $field_value) {
         $ft  = ($field_type == 'nominal') ? $ft = 'nominalvalueidentity' : $ft = $field_type . 'value';
         $ei = array(
@@ -102,6 +109,11 @@ class Observation
     public function setInvolved($involved)    {
         $this->involved = $involved;
     }
+    /**
+     * 
+     * @param string $person_identity id (URI) van persoon
+     * @param string $involvement_type_identity
+     */
     public function addInvolved($person_identity, $involvement_type_identity) {
         $inv = array(
             'personidentity' => $person_identity,
@@ -120,7 +132,12 @@ class Observation
     public function getLocation()    {
         return $this->location;
     }
-
+    /**
+     * 
+     * @param int $buffer
+     * @param string $ewkt
+     * @param string $locationtypeidentity
+     */
     public function setLocation($buffer, $ewkt, $locationtypeidentity)    {
         $this->location['buffer'] = $buffer;
         $this->location['ewkt'] = $ewkt;
@@ -146,7 +163,10 @@ class Observation
     public function getOriginalabundance()    {
         return $this->originalabundance;
     }
-
+    /**
+     * 
+     * @param string $originalabundance
+     */
     public function setOriginalabundance($originalabundance)    {
         $this->originalabundance = $originalabundance;
     }
@@ -154,7 +174,10 @@ class Observation
     public function getPeriodstart()    {
         return $this->periodstart;
     }
-
+    /**
+     * 
+     * @param string $periodstart
+     */
     public function setPeriodstart($periodstart)    {
         $this->periodstart = $periodstart;
     }
@@ -162,7 +185,10 @@ class Observation
     public function getPeriodstop()    {
         return $this->periodstop;
     }
-
+    /**
+     * 
+     * @param string $periodstop
+     */
     public function setPeriodstop($periodstop)    {
         $this->periodstop = $periodstop;
     }
@@ -170,7 +196,7 @@ class Observation
     public function getScaleidentity()    {
         return $this->scaleidentity;
     }
-
+    
     public function setScaleidentity($scaleidentity)    {
         $this->scaleidentity = $scaleidentity;
     }
@@ -202,7 +228,10 @@ class Observation
     public function getTaxonidentity()    {
         return $this->taxonidentity;
     }
-
+    /**
+     * 
+     * @param string $taxonidentity
+     */
     public function setTaxonidentity($taxonidentity)    {
         $this->taxonidentity = $taxonidentity;
     }
