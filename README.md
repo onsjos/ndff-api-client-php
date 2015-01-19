@@ -1,6 +1,6 @@
 ndff-api-client-php
 ===================
-
+Client for ndff api, see http://beheer.ndff.nl/documentatie/api/waarnemingen.html for api documentation
 
 
 Installing
