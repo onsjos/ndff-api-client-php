@@ -11,47 +11,71 @@ namespace NDFF;
 
 class Observation
 {
-
+    var $abundanceSchema;
+    var $abundanceValue;
     var $activity;
     var $biotope;
-    var $datasetidentity;
-    var $determinationmethod;
+    var $dataset;
+    var $determinationMethod;
     var $extrainfo = [];
+    var $identity;
     var $involved = [];
     var $lifestage;
     var $location = [];
-    var $locationname;
-    var $observationidentity;
-    var $originalabundance;
-    var $periodstart;
-    var $periodstop;
-    var $scaleidentity;
+    var $periodStart;
+    var $periodStop;
     var $sex;
-    var $subjecttypeidentity;
-    var $surveymethod;
-    var $taxonidentity;
+    var $subjectType;
+    var $surveyMethod;
+    var $taxon;
     
     /**
      * Create new Observation with default values
      */
     public function __construct() {
+        $this->setAbundanceSchema('http://ndff-ecogrid.nl/codes/scales/exact_count');
+        $this->setAbundanceValue(0);
         $this->setActivity('http://ndff-ecogrid.nl/codes/domainvalues/observation/activities/unknown');
         $this->setBiotope('http://ndff-ecogrid.nl/codes/domainvalues/location/biotopes/unknown');
-        $this->setDeterminationmethod('http://ndff-ecogrid.nl/codes/domainvalues/observation/determinationmethods/unknown');
+        $this->setDeterminationMethod('http://ndff-ecogrid.nl/codes/domainvalues/observation/determinationmethods/unknown');
         $this->setLifestage('http://ndff-ecogrid.nl/codes/domainvalues/observation/lifestages/unknown');
-        $this->setLocation(0, '', 'http://ndff-ecogrid.nl/codes/locationtypes/point');
-        $this->setOriginalabundance(0);
-        $this->setPeriodstart(date('o-m-d\TH:i:s'));        
-        $this->setScaleidentity('http://ndff-ecogrid.nl/codes/scales/exact_count');
+        $this->setLocation(0, '');
+        $this->setPeriodStart(date('o-m-d\TH:i:s'));
         $this->setSex('http://ndff-ecogrid.nl/codes/domainvalues/observation/sexes/undefined');
-        $this->setSubjecttypeidentity('http://ndff-ecogrid.nl/codes/subjecttypes/live/individual');
-        $this->setSurveymethod('http://ndff-ecogrid.nl/codes/domainvalues/survey/surveymethods/unknown');
+        $this->setSubjectType('http://ndff-ecogrid.nl/codes/subjecttypes/live/individual');
+        $this->setSurveyMethod('http://ndff-ecogrid.nl/codes/domainvalues/survey/surveymethods/unknown');
+    }
+
+
+    public function getAbundanceSchema()    {
+        return $this->abundanceSchema;
+    }
+    /**
+     *
+     * @param string $abundanceSchema
+     */
+    public function setAbundanceSchema($abundanceSchema)    {
+        $this->abundanceSchema = $abundanceSchema;
+    }
+
+    public function getAbundanceValue()    {
+        return $this->abundanceValue;
+    }
+    /**
+     *
+     * @param string $abundanceValue
+     */
+    public function setAbundanceValue($abundanceValue)    {
+        $this->abundanceValue = $abundanceValue;
     }
 
     public function getActivity()    {
         return $this->activity;
     }
-
+    /**
+     *
+     * @param string $activity
+     */
     public function setActivity($activity)    {
         $this->activity = $activity;
     }
@@ -59,39 +83,44 @@ class Observation
     public function getBiotope()    {
         return $this->biotope;
     }
-
+    /**
+     *
+     * @param string $biotope
+     */
     public function setBiotope($biotope)    {
         $this->biotope = $biotope;
     }
 
-    public function getDatasetidentity()    {
-        return $this->datasetidentity;
-    }
-
-    public function setDatasetidentity($datasetidentity)    {
-        $this->datasetidentity = $datasetidentity;
-    }
-
-    public function getDeterminationmethod()    {
-        return $this->determinationmethod;
-    }
-
-    public function setDeterminationmethod($determinationmethod)    {
-        $this->determinationmethod = $determinationmethod;
+    public function getDataset()    {
+        return $this->dataset;
     }
     /**
-     * 
-     * @param type $field_identity, keyidentity id van extra-info veld
-     * @param string $field_type, bijv. string,identifier, nominal
-     * @param type $field_value waarde voor veld
+     *
+     * @param string $dataset
      */
-    public function addExtrainfo($field_identity, $field_type, $field_value) {
-        $ft  = ($field_type == 'nominal') ? $ft = 'nominalvalueidentity' : $ft = $field_type . 'value';
-        $ei = array(
-            'keyidentity' => $field_identity,
-            'value' => array($ft => $field_value)
-        );
-        array_push($this->extrainfo, $ei);
+    public function setDataset($dataset)    {
+        $this->dataset = $dataset;
+    }
+
+    public function getDeterminationMethod()    {
+        return $this->determinationMethod;
+    }
+    /**
+     *
+     * @param string $determinationMethod
+     */
+    public function setDeterminationMethod($determinationMethod)    {
+        $this->determinationMethod = $determinationMethod;
+    }
+
+    /**
+     *
+     * @param string $key , keyidentity id van extra-info veld
+     * @param string $value waarde voor veld
+     * @return int
+     */
+    public function addExtrainfo($key, $value) {
+        return array_push($this->extrainfo, array('key' => $key,'value' => $value));
     }
 
     public function getExtrainfo()    {
@@ -110,21 +139,20 @@ class Observation
         $this->involved = $involved;
     }
     /**
-     * 
-     * @param string $person_identity id (URI) van persoon
-     * @param string $involvement_type_identity
+     *
+     * @param string $person id (URI) van persoon
+     * @param string $involvement_type
      */
-    public function addInvolved($person_identity, $involvement_type_identity) {
-        $inv = array(
-            'personidentity' => $person_identity,
-            'involvementtypeidentity' => $involvement_type_identity
-        );
-        array_push($this->involved, $inv);
+    public function addInvolved($person, $involvement_type) {
+        array_push($this->involved, array('person' => $person, 'involvementType' => $involvement_type));
     }
     public function getLifestage()    {
         return $this->lifestage;
     }
-
+    /**
+     *
+     * @param string $lifestage
+     */
     public function setLifestage($lifestage)    {
         $this->lifestage = $lifestage;
     }
@@ -133,107 +161,90 @@ class Observation
         return $this->location;
     }
     /**
-     * 
+     *
      * @param int $buffer
-     * @param string $ewkt
-     * @param string $locationtypeidentity
+     * @param string $geometry
      */
-    public function setLocation($buffer, $ewkt, $locationtypeidentity)    {
+    public function setLocation($buffer, $geometry)    {
         $this->location['buffer'] = $buffer;
-        $this->location['ewkt'] = $ewkt;
-        $this->location['locationtypeidentity'] = $locationtypeidentity;
+        $this->location['geometry'] = $geometry;
     }
 
-    public function getLocationname()    {
-        return $this->locationname;
+    public function getIdentity()    {
+        return $this->identity;
+    }
+    /**
+     *
+     * @param string $identity
+     */
+    public function setIdentity($identity)    {
+        $this->identity = $identity;
     }
 
-    public function setLocationname($locationname)    {
-        $this->locationname = $locationname;
-    }
-
-    public function getObservationidentity()    {
-        return $this->observationidentity;
-    }
-
-    public function setObservationidentity($observationidentity)    {
-        $this->observationidentity = $observationidentity;
-    }
-
-    public function getOriginalabundance()    {
-        return $this->originalabundance;
+    public function getPeriodStart()    {
+        return $this->periodStart;
     }
     /**
      * 
-     * @param string $originalabundance
+     * @param string $periodStart
      */
-    public function setOriginalabundance($originalabundance)    {
-        $this->originalabundance = $originalabundance;
+    public function setPeriodStart($periodStart)    {
+        $this->periodStart = $periodStart;
     }
 
-    public function getPeriodstart()    {
-        return $this->periodstart;
+    public function getPeriodStop()    {
+        return $this->periodStop;
     }
     /**
      * 
-     * @param string $periodstart
+     * @param string $periodStop
      */
-    public function setPeriodstart($periodstart)    {
-        $this->periodstart = $periodstart;
-    }
-
-    public function getPeriodstop()    {
-        return $this->periodstop;
-    }
-    /**
-     * 
-     * @param string $periodstop
-     */
-    public function setPeriodstop($periodstop)    {
-        $this->periodstop = $periodstop;
-    }
-
-    public function getScaleidentity()    {
-        return $this->scaleidentity;
-    }
-    
-    public function setScaleidentity($scaleidentity)    {
-        $this->scaleidentity = $scaleidentity;
+    public function setPeriodStop($periodStop)    {
+        $this->periodStop = $periodStop;
     }
 
     public function getSex()    {
         return $this->sex;
     }
-
+    /**
+     *
+     * @param string $sex
+     */
     public function setSex($sex)    {
         $this->sex = $sex;
     }
 
-    public function getSubjecttypeidentity()    {
-        return $this->subjecttypeidentity;
+    public function getSubjectType()    {
+        return $this->subjectType;
+    }
+    /**
+     *
+     * @param string $subjectType
+     */
+    public function setSubjectType($subjectType)    {
+        $this->subjectType = $subjectType;
     }
 
-    public function setSubjecttypeidentity($subjecttypeidentity)    {
-        $this->subjecttypeidentity = $subjecttypeidentity;
+    public function getSurveyMethod()    {
+        return $this->surveyMethod;
+    }
+    /**
+     *
+     * @param string $surveyMethod
+     */
+    public function setSurveyMethod($surveyMethod)    {
+        $this->surveyMethod = $surveyMethod;
     }
 
-    public function getSurveymethod()    {
-        return $this->surveymethod;
-    }
-
-    public function setSurveymethod($surveymethod)    {
-        $this->surveymethod = $surveymethod;
-    }
-
-    public function getTaxonidentity()    {
-        return $this->taxonidentity;
+    public function getTaxon()    {
+        return $this->taxon;
     }
     /**
      * 
-     * @param string $taxonidentity
+     * @param string $taxon
      */
-    public function setTaxonidentity($taxonidentity)    {
-        $this->taxonidentity = $taxonidentity;
+    public function setTaxon($taxon)    {
+        $this->taxon = $taxon;
     }
 
 }
