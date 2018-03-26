@@ -1,6 +1,6 @@
 ndff-api-client-php
 ===================
-Client for NDFF API 2, see http://beheer.ndff.nl/documentatie/api/waarnemingen.html for api documentation
+Client for NDFF API 2, see https://ndff.zendesk.com/hc/nl/articles/115005846805-Documentatie-NDFF-API-2-0 for api documentation
 
 
 Installing
@@ -29,27 +29,27 @@ to run the following examples.
 ``` php
     $code_request = new \NDFF\CodeRequest();
 ```
-* GET speciesgroups *
+*GET speciesgroups*
 ``` php
     $speciesgroups = $code_request->resource_get('speciesgroups');
 ```
 
-* GET speciesgroup butterflies *
+*GET speciesgroup butterflies* 
 ``` php
     $speciesgroup_butterflies = $code_request->resource_get('speciesgroups/3596151');
 ```
 
-* GET species in speciesgroup butterflies *
+*GET species in speciesgroup butterflies* 
 ``` php
     $butterflies = $code_request->resource_get('speciesgroups/3596151/taxa');
 ```
 
-* GET lifestages for butterflies *
+*GET lifestages for butterflies*
 ``` php
     $butterflies = $code_request->resource_get('speciesgroups/3596151/lifestages');
 ```
 
-* GET activities in english, ordered by name desc, limit to 10 results per page *
+*GET activities in english, ordered by name desc, limit to 10 results per page* 
 ``` php
     $code_request->setUrlParameter('language', 'en');
     $code_request->setUrlParameter('ordering', '-name');
@@ -57,24 +57,21 @@ to run the following examples.
     $activities = $code_request->resource_get('activities');
 ```
 
-* Authenticate to the API and get an Oauth2 token
+*Authenticate to the API and get an Oauth2 token*
 ``` php
-    $auth = new \NDFF\ApiAuthentication();
-    
     // send username, password, client_id and (optional) client_secret
+    $auth = new \NDFF\ApiAuthentication();
     $auth->authenticate('demo_user', '********', 'Oni9kqFIhPcfghIiX3a7ujFaF04M1T5w0ZUaYLUY', 'VbwYXdrn3QTGjtOUc9ZRXCNQJXH0DDNSGGTEB7sv343Pr2WA3tcx1IOx914dE2Mi0E9IWsxQ4y1EeEYJPowxvJwKiJIqtonVCrGZom4zQeYtpj3diHWxDRv3BcQCcHAuP');
-    
-    // you access_token
     $token = $auth->getToken();
 ```
 
-* GET list of available Domains *
+*GET list of available Domains*
 ``` php
     $api_request = new \NDFF\APIRequest($token);
     $domains = $api_request->resource_get('domains');
 ```
 
-* GET list of your Observations *
+*GET list of your Observations*
 ``` php
     $observations = $api_request->resource_get('observations');
     
