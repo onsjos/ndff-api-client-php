@@ -21,7 +21,7 @@ Download the zip from github or install through [composer](www.getcomposer.org).
 }
 ```
 
-Examples
+Examples Codes
 ------------------------
 After including the classes (e.g. with the composer autoloader) you should be able
 to run the following examples.
@@ -49,13 +49,16 @@ to run the following examples.
     $butterflies = $code_request->resource_get('speciesgroups/3596151/lifestages');
 ```
 
-*GET activities in english, ordered by name desc, limit to 10 results per page* 
+*GET activities in English, ordered by name desc, limit to 10 results per page* 
 ``` php
     $code_request->setUrlParameter('language', 'en');
     $code_request->setUrlParameter('ordering', '-name');
     $code_request->setUrlParameter('limit', '10');
     $activities = $code_request->resource_get('activities');
 ```
+
+Examples API
+------------------------
 
 *Authenticate to the API and get an Oauth2 token*
 ``` php
