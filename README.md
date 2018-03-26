@@ -109,6 +109,9 @@ Examples API
     $result = $api_request->resource_put('observations', $id, $existing_observation);
 ```
 
+Miscellaneous
+------------------------
+
 *In Silex Controller*
 ``` php
     use Symfony\Component\HttpFoundation\Response;
