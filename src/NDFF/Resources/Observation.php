@@ -4,7 +4,7 @@
  * Author: jos
  * Date: 5/15/13
  * Class ndff_observation
- * Creates a NDFF observation object with default values
+ * Creates an NDFF Observation object with default values
  */
 
 namespace NDFF;
@@ -18,7 +18,7 @@ class Observation
     var $dataset;
     var $determinationMethod;
     var $extrainfo = [];
-    var $identity;
+    var $identity = '';
     var $involved = [];
     var $lifestage;
     var $location = [];
@@ -140,12 +140,13 @@ class Observation
     }
     /**
      *
-     * @param string $person id (URI) van persoon
      * @param string $involvement_type
+     * @param string $person id (URI) van persoon
      */
-    public function addInvolved($person, $involvement_type) {
-        array_push($this->involved, array('person' => $person, 'involvementType' => $involvement_type));
+    public function addInvolved($involvement_type, $person) {
+        array_push($this->involved, array('involvementType' => $involvement_type, 'person' => $person));
     }
+
     public function getLifestage()    {
         return $this->lifestage;
     }

@@ -4,32 +4,43 @@
  * Author: jos
  * Date: 5/15/13
  * Get codes from the NDFF API
- * Todo: should only allow GET as it is a readonly resource
-  */
+ */
 
 namespace NDFF;
 
-use NDFF\Request;
+
 
 class CodeRequest extends Request
 {
+    var $url_params = array('paginator' => 'None');
 
-    var $project;
-
-    function __construct($base_url = 'http://testapi.ndff.nl/list/v1/',$encoding_format=false) {        
+    function __construct() {
         // no authentication required
-        parent::__construct($base_url, false, false, $encoding_format);
+        parent::__construct(false);
+        parent::setBaseUrl(parent::CODES_URL);
     }
 
     function __destruct() {
         parent::__destruct();
     }
 
-    function build_url() {
-        $url = rtrim($this->base_url, '/') . '/' . $this->project . '/' . $this->resource . '/';
-        $url .= ($this->resource_id) ? $this->resource_id . '/' : '';
-        $url .= ($this->url_params) ? $this->url_params : '';
-        return $url;
+    function readOnly() {
+        try {
+            $error = 'NDFF codes are readonly';
+            throw new \Exception($error);
+        } catch (\Exception $e) {
+            echo 'Exception: ',  $e->getMessage(), "\n";
+        }
+    }
+    function resource_post($resource, $data) {
+        $this->readOnly();
     }
 
+    public function resource_put($resource, $resource_id, $data) {
+        $this->readOnly();
+    }
+
+    function resource_delete($resource, $resource_id) {
+        $this->readOnly();
+    }
 }
