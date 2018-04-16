@@ -45,8 +45,10 @@ class ApiRequest extends Request
                 $obj = new \stdClass();
         }
         foreach ($obj as $key => $value) {
-            if (array_key_exists($key, $data)) {
-                $obj->$key = $data[$key];
+            if ($data != null) {
+                if (array_key_exists($key, $data)) {
+                    $obj->$key = $data[$key];
+                }
             }
         }
         return $obj;
@@ -80,9 +82,9 @@ class ApiRequest extends Request
 
     function build_url() {
         if ($this->resource == 'domains') {
-            $url = $this->base_url . $this->resource . 's/';
+            $url = $this->base_url . $this->resource . '/';
         } else {
-            $url = $this->base_url . 'domains/' . $this->domain_id . '/' . $this->resource . 's/';
+            $url = $this->base_url . 'domains/' . $this->domain_id . '/' . $this->resource . '/';
         }
         $url .= ($this->resource_id) ? $this->resource_id . '/' : '';
         if ($this->url_params) {
