@@ -80,7 +80,7 @@ class ApiRequest extends Request
 
     function build_url() {
         if ($this->resource == 'domains') {
-            $url = $this->base_url . $this->resource . '/';
+            $url = $this->base_url . $this->resource . 's/';
         } else {
             $url = $this->base_url . 'domains/' . $this->domain_id . '/' . $this->resource . 's/';
         }
