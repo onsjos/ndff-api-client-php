@@ -124,7 +124,6 @@ class Request
     public function set_request_data($request_data) {
         // $this->request_data = json_encode((array)$request_data, JSON_UNESCAPED_SLASHES);
         $this->request_data = json_encode((array)$request_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-        print_r($this->get_request_data());
     }
 
     public function get_response_data() {
