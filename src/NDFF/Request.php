@@ -106,6 +106,12 @@ class Request
         return $this->response_headers_string;
     }
 
+    public function get_location_header() {
+        if (preg_match('~Location: (.*)~i', $this->response_headers_string, $match)) {
+            return trim($match[1]);
+        }
+    }
+
     public function get_http_code() {
         if (!empty($this->response_headers['http_code'])) return $this->response_headers['http_code'];
         return false;
