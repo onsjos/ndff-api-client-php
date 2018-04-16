@@ -82,7 +82,7 @@ class ApiRequest extends Request
         if ($this->resource == 'domains') {
             $url = $this->base_url . $this->resource . '/';
         } else {
-            $url = $this->base_url . 'domains/' . $this->domain_id . '/' . $this->resource . '/';
+            $url = $this->base_url . 'domains/' . $this->domain_id . '/' . $this->resource . 's/';
         }
         $url .= ($this->resource_id) ? $this->resource_id . '/' : '';
         if ($this->url_params) {
