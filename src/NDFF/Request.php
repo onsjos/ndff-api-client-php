@@ -161,7 +161,6 @@ class Request
         if ($resource_id) {
             $ch = $this->curl_construct($resource, $resource_id);
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array( $this->content_type ));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
             curl_setopt($ch, CURLOPT_VERBOSE, TRUE);
             return $this->curl_get($ch);
